@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+    <head>
+        <style type="text/css">
+body {
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-size: 13px;
+    line-height: 1.7;
+    word-wrap: break-word;
+    color: #222;
+    background-color: #fff;
+}
+
+.title_bar {
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    z-index: 11;
+    width: 100%;
+    height: 45px;
+    background: #0767c8;
+    background: -webkit-linear-gradient(top,#086ed5,#055db5);
+    background: linear-gradient(to bottom,#086ed5,#055db5);
+    border-bottom: 1px solid #044e97;
+    box-shadow: 0px 1px 2px rgba(0,0,0,0.25), inset 0px 1px 0px rgba(255,255,255,0.15);
+}
+.center_bar {
+    position: relative;
+    height: 100%;
+    width: 960px;
+    z-index: 10;
+    margin: 0 auto;
+}
+.title {
+    float: left;
+    width: 61px;
+    height: 100%;
+    background-image: url({% static "title.png" %});
+    background-repeat: no-repeat;
+    background-position: 0 8px;
+    text-indent: -9999px
+}
+.serch{
+    position: relative;
+    float: left;
+    width: 367px;
+    margin: 7px 0 0 12px;
+
+}
+.input {
+    padding: 7px 50px 7px 10px;
+    width: 100%;
+    color: #49525c;
+    font-size: 14px;
+    line-height: 17px;
+    background-color: #e1eaf2;
+    border: 1px solid #045bb2;
+    border-radius: 4px;
+    box-shadow: inset 0px 1px 3px rgba(0,0,0,0.2), 0px 1px 0px rgba(255,255,255,0.1);
+    outline: 0;
+    box-sizing: border-box;
+    -webkit-transition: all .2s ease-in-out;
+    transition: all .2s ease-in-out;
+}
+.button {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    width: 40px;
+    height: 100%;
+    z-index: 20;
+    background: #0e78e7;
+    background: -webkit-linear-gradient(top,#0e7bef,#0d73da);
+    background: linear-gradient(to bottom,#0e7bef,#0d73da);
+    border: 1px solid #045bb2;
+    border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px;
+    box-shadow: 0px 1px 2px rgba(0,0,0,0.05), inset 0px 1px 1px rgba(255,255,255,0.15);
+    box-sizing: border-box;
+    outline: 0;
+    cursor: pointer;
+}
+.button-icon{
+    background-position: -82px 0;
+    width: 15px;
+    height: 15px;
+    background-image: url({% static "icon.png" %});
+    background-repeat: no-repeat;
+    display: inline-block;
+    vertical-align: middle;
+}
+.user-space{
+    padding: 0 0 0 10px;
+    position: relative;
+    height: 100%;
+    width: 150px;
+    float: right;
+
+}
+.user-photo{
+    position: relative;
+    background-color: transparent;
+    left: 9px;
+    top: 10px;
+    height: 25px;
+    width: 25px;
+    border: 1px solid rgba(0,0,0,.1);
+    box-shadow: 0px 1px 0px rgba(255,255,255,0.1);
+    border-radius: 3px;
+
+}
+.name{
+    position: absolute;
+    top: 11px;
+    left: 55px;
+    color: #fff;
+    white-space: nowrap;
+    text-shadow: 0px 1px 1px rgba(0,0,0,0.12);
+    font-size: 14px;
+    -webkit-font-smoothing: subpixel-antialiased;
+}
+.main_content{
+    position: relative;
+    top: 60px;
+    width: 960px;
+    height: 100%;
+    margin: 0 auto;
+    background-color: #000000;
+
+}
+.side_bar{
+    position: relative;
+    float: right;
+    margin: 0 0 0 -270px;
+    width: 270px;
+    height: 100px;
+    z-index: 10;
+    margin: 0 auto;
+}
+.head_text{
+    padding: 10px 0 10px 7px;
+    background-color: #fafafa;
+    border: 1px solid #e7eaf1;
+    font-size: 20px;
+    border-radius: 4px;
+    color: #6c829f;
+    text-align: center;
+}
+.sider_bar_content{
+    position: relative;
+    top: 10px;
+    padding: 7px 7px 7px 0px;
+    background-color: #fafafa;
+    color: #999;
+    border-radius: 4px;
+    line-height: 1.7;
+}
+.topic_name{
+    color: #259;
+    font-size: 13px;
+    border-bottom:1px solid #ddd;
+    width: 50px;
+}
+.topic_info{
+    font-size: 12px;
+    float: right;
+    border-bottom:1px solid #ddd;
+}
+
+        </style>
+    </head>
+    <body>
+        <div class="title_bar">
+            <div class=center_bar>
+                <div class="title">知乎</div>
+                <div class="serch">
+                    <form>
+                        <input name="topic" class="input" placeholder="搜索你感兴趣的话题...">
+                        <button type="submit" class="button">
+                            <span class="button-icon"></span>
+                        </button>
+                    </form>
+                </div>
+                <div class="user-space">
+                    <img class="user-photo" src="{% static "user-photo.jpg"%}">
+                    <span class="name">Sweet Dreams</span>
+                </div>
+            </div>
+        </div>
+        <div class="main_content">
+            <div class="side_bar">
+                <div class="head_text">知乎话题 TOP100</div>
+                <div class="sider_bar_content">
+                    <ol>
+                        {% for topic in top100_topics %}
+                        <li>
+                            <span class="topic_name"><strong>{{topic.name}}</strong></span>
+                            <span class="topic_info">{{topic.follower_num}}人关注</span>
+                        </li>
+                        {% endfor %}
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
+
