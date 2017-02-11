@@ -19,7 +19,8 @@ sub_list=[]
 
 def save_all_follow_num():
     '''为数据库中所有的话题添加或者更新人数'''
-    all_topic=Topic.objects.filter(follower_num=None).iterator()
+#    all_topic=Topic.objects.filter(follower_num=None).iterator()
+    all_topic=Topic.objects.all().iterator()
     for topic in all_topic:
         try:
             print(topic.topic_id)
@@ -42,7 +43,6 @@ def save_relationship(topic_id=19776749):
         return
     complete_list.append(topic_id)
     url='https://www.zhihu.com/topic/{}/organize/entire'.format(topic_id)
-#    url='http://127.0.0.1:8090/{}'.format(topic_id)
     response=get_response(url,data=api_key,method='POST')
     relationship_list=eval(response.text)
     current_topic=Topic.objects.get_or_create(topic_id=topic_id)[0]

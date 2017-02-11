@@ -124,10 +124,8 @@ body {
     position: relative;
     top: 60px;
     width: 960px;
-    height: 100%;
+    height: auto;
     margin: 0 auto;
-    background-color: #000000;
-
 }
 .side_bar{
     position: relative;
@@ -137,11 +135,13 @@ body {
     height: 100px;
     z-index: 10;
     margin: 0 auto;
+    overflow: hidden;
 }
 .head_text{
     padding: 10px 0 10px 7px;
     background-color: #fafafa;
     border: 1px solid #e7eaf1;
+    width: 100%;
     font-size: 20px;
     border-radius: 4px;
     color: #6c829f;
@@ -150,6 +150,7 @@ body {
 .sider_bar_content{
     position: relative;
     top: 10px;
+    width: 100%;
     padding: 7px 7px 7px 0px;
     background-color: #fafafa;
     color: #999;
@@ -161,11 +162,19 @@ body {
     font-size: 13px;
     border-bottom:1px solid #ddd;
     width: 50px;
+    float: left;
 }
 .topic_info{
     font-size: 12px;
-    float: right;
     border-bottom:1px solid #ddd;
+    float: right;
+}
+.left_content{
+    background-color: #0F0;
+    padding: 7px 7px 7px 7px;
+    margin-right: 337px;
+    background-color: #fafafa;
+    height: 100px;
 }
 
         </style>
@@ -175,7 +184,7 @@ body {
             <div class=center_bar>
                 <div class="title">知乎</div>
                 <div class="serch">
-                    <form>
+                    <form method="POST">
                         <input name="topic" class="input" placeholder="搜索你感兴趣的话题...">
                         <button type="submit" class="button">
                             <span class="button-icon"></span>
@@ -201,6 +210,10 @@ body {
                         {% endfor %}
                     </ol>
                 </div>
+            </div>
+            <div class="left_content">
+                <iframe src="{% static "3Dspace.html" %}" width="100%" height="700"></frame>
+                
             </div>
         </div>
     </body>
