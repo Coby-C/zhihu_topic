@@ -132,10 +132,8 @@ body {
     float: right;
     margin: 0 0 0 -270px;
     width: 270px;
-    height: 100px;
     z-index: 10;
     margin: 0 auto;
-    overflow: hidden;
 }
 .head_text{
     padding: 10px 0 10px 7px;
@@ -162,30 +160,77 @@ body {
     font-size: 13px;
     border-bottom:1px solid #ddd;
     width: 50px;
-    float: left;
 }
 .topic_info{
     font-size: 12px;
     border-bottom:1px solid #ddd;
     float: right;
+    color: #999;
 }
 .left_content{
-    background-color: #0F0;
     padding: 7px 7px 7px 7px;
     margin-right: 337px;
-    background-color: #fafafa;
+    height: 100%;
+}
+.sub_topic_name{
+    color: #259;
+    font-size: 13px;
+    border:1px solid #daecf5;
+    border-radius:30px;
+    padding:3px 10px;
+}
+.current_topic_info{
+    border-bottom:1px solid #ccc;
+    padding:10px 20px;
+}
+.current_topic_name{
+    color:#ffffff;
+    font-size:20px;
+    border:1px solid #daecf5;
+    border-radius:30px;
+    padding:3px 10px 3px 10px;
+    background: #0767c8;
+    background: -webkit-linear-gradient(top,#086ed5,#055db5);
+    background: linear-gradient(to bottom,#086ed5,#055db5);
+    margin-left: -20px;
+}
+.sub_topic{
+    line-height: 2.4; 
+}
+.spider_controller{
+    background-color:#aaffaa;
+}
+.monitoring_text{
     height: 100px;
+    width: 100%;
+    background-color:#aaaaff;
 }
 
+
         </style>
+<script>
+if(typeof(EventSource)!=="undefined")
+  {
+  var source=new EventSource("/time/");
+  source.onmessage=function(event)
+    {
+    document.getElementById("monitoring_text").innerHTML+=event.data + "<br />";
+    };
+  }
+else
+  {
+  document.getElementById("monitoring_text").innerHTML="抱歉，您的浏览器不支持 server-sent 事件 ...";
+  }
+</script>
+ 
     </head>
     <body>
         <div class="title_bar">
             <div class=center_bar>
                 <div class="title">知乎</div>
                 <div class="serch">
-                    <form method="POST">
-                        <input name="topic" class="input" placeholder="搜索你感兴趣的话题...">
+                    <form method="GET">
+                        <input name="topic_name" class="input" placeholder="搜索你感兴趣的话题...">
                         <button type="submit" class="button">
                             <span class="button-icon"></span>
                         </button>
@@ -212,8 +257,41 @@ body {
                 </div>
             </div>
             <div class="left_content">
-                <iframe src="{% static "3Dspace.html" %}" width="100%" height="700"></frame>
-                
+                <div class="spider_controller">
+                    <div class="monitoring_text" id="monitoring_text">
+                    </div>
+                    <button>
+                        开始采集/停止
+                    </button>
+                </div>
+                {% for current_topic in current_topic_list %}
+                    <div class="current_topic_info">
+                        <span class="current_topic_name">
+                            {{current_topic.name}} 
+                        </span>
+                        <span class="topic_info">&nbsp{{current_topic.follower_num}}人关注&nbsp</span>
+                        <div class="sub_topic">
+                            <div><b>子话题</b></div>
+                            {% if current_topic.sub_topic.all %}
+                                {% for sub_topic in current_topic.sub_topic.all %}
+                                    <span class="sub_topic_name">{{sub_topic.name}}</span>&nbsp&nbsp
+                                {% endfor %}
+                            {% else %}
+                                    &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp暂无
+                            {% endif %}
+                        </div>
+                        <div><b>描述</b>
+                            <div>
+                                {% if current_topic_description %}
+                                    <span class="current_topic_description"> &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp{{current_topic.description}} </span>
+                                {% else %}
+                                    <span class="current_topic_description"> &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp暂无 </span>
+                                {% endif %}
+                            </div>
+                        </div>
+
+                    </div>
+                {% endfor %}
             </div>
         </div>
     </body>

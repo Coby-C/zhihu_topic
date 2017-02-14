@@ -18,7 +18,8 @@ from django.contrib import admin
 from topics.views import *
 
 urlpatterns = [
-    url(r'',return_home_page),
-    url(r'^admin/', admin.site.urls),
-    url(r'^home/',return_home_page),
+    url(r'^$',return_home_page),
+    url(r'^admin/$', admin.site.urls),
+    url(r'^home/$',return_home_page),
+    url(r'^time/$',time),
 ]
