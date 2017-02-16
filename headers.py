@@ -6,7 +6,7 @@ Accept_Language='zh-Hans-CN, zh-Hans; q=0.5'
 Connection='Keep-Alive'
 Referer='https://www.zhihu.com/topic'
 User_Agent=cycle(['Baiduspider+(+http://www.baidu.com/search/spider.htm)','Googlebot/2.1 (+http://www.googlebot.com/bot.html)','Mozilla/5.0 (compatible; Yahoo! Slurp China; http://misc.yahoo.com.cn/help.html")','Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.79 Safari/537.36 Edge/14.14393'])
-cookies_text='__utmc=51854390; l_n_c=1; q_c1=691e59ea9dfd457ab3e754363f907fc3|1483932514000|1483932514000; l_cap_id=OWYwOTIwNGYxZWRiNGE5NDg0MmViYmU3NmVlODlmYzA=|1483933508|926369a90d949398502551fc355f13359550e0d2; cap_id=ZDBlNjdmZTdiZmRmNDgxZWJjNWY1ZjExNTE0Zjg1Yjk=|1483933508|60f057513fe385108930b28ffefdc397349ddc37; r_cap_id=NDllYmM0YzQxOWZlNDFhOGFlMWM3Mjg0ZTMyYTIzZTA=|1483932517|43d396014dda42630d6aa8c707d8c6132e2ab90b; __utma=51854390.553956168.1482239411.1482714756.1483930975.3; __utmz=51854390.1483930975.3.3.utmcsr=baidu|utmccn=(organic)|utmcmd=organic; d_c0=ABDCV1gpBwuPTrLrHSSbIINXIl49ZYhxyrM=|1482239161; _zap=409a310a-8069-4a99-bb65-395818fb2b4f; __utmv=51854390.100--|2=registration_date=20150731=1^3=entry_date=20150731=1; login=OWU2ODUyN2Y5MGY0NDg1MmExMzc3NDU2YTEzNGZhZTI=|1483933535|5923a31e83fee3d378021a9b8139871a0b04b657; __utmb=51854390.0.10.1483930975; z_c0=Mi4wQUJDTTg0cldlQWdBRU1KWFdDa0hDeGNBQUFCaEFsVk54WldhV0FEMmI4UTM1dk13LVhxRk5yN2QzZkhveGNqTUtB|1483933949|ea6ed27cf664476750674e1d253805cc4af29e91; unlock_ticket=QUJDTTg0cldlQWdYQUFBQVlRSlZUYzBQYzFnNVBwZEJLN3paSnkzRzlDaXNSUDlsZkNkR0VnPT0=|1483933893|8f80e21aa10b0ed6e2287b305e3119834fdf88ef; aliyungf_tc=AQAAAGe9UT47jAEADZvY3fTcud1oBLgp; _xsrf=e0a8d10c9ee95127a2e1619a15880753'
+cookies_text='q_c1=eb38b40993414766b08611a66a1fc5b3|1487152677000|1487152677000; l_cap_id=MmVjZTY5YmZlNWUzNDFmMWFkZDViZGFkMWNjNzNhYzg=|1487152677|1002b9a6d20d0320a808fcc0891e8fcad390021a; cap_id=YjA0NTU1MGY3NmEwNGUxZGI2ZWNmZTkzNGJhYjVmZGE=|1487152677|d9bc73dee4a4fe2922368b85bb21563623ee4eb4; d_c0=ABCCiBw0LAuPTg700etoRp0t0dVBpn3nj9g=|1484725011; r_cap_id=ZmEzZmEyOTVkNDk4NDlkZThiNTMxMmI5NWQ5ZjdjNmU=|1484725012|249ec38b8f88efb86489a1d17245716bba942955; __utma=51854390.474663210.1484725042.1487137544.1487152648.4; __utmz=51854390.1487137544.3.3.utmcsr=zhihu.com|utmccn=(referral)|utmcmd=referral|utmcct=/; __utmv=51854390.000--|2=registration_date=20141113=1^3=entry_date=20170215=1; login=ZTU0YmNiNDUwNTU0NDg1NDljMzQzNDIxNGY3YmZlMzc=|1487137554|63351c6d5d129e315c14bae5e724c45a7b463e1b; nweb_qa=heifetz; _zap=d717fdfd-3924-4542-a3a9-8c77f98eabcb; __utmb=51854390.0.10.1487152648; l_n_c=1; n_c=1; __utmc=51854390; _xsrf=7d0674f13ccdb33e4562bf4137d6dae0; aliyungf_tc=AQAAAFMuDRok7gkASch3e+6rbuElRKqk'
 
 headers={'Accept':Accept,
         'Accept-Encoding':Accept_Encoding,
@@ -15,7 +15,8 @@ headers={'Accept':Accept,
         'Referer':Referer,}
 def get_headers():
     global headers,User_Agent
-    headers['User-Agent']=next(User_Agent)
+#    headers['User-Agent']=next(User_Agent)
+    headers['User-Agent']='Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.79 Safari/537.36 Edge/14.14393'
 #    print(headers)
     return headers
 

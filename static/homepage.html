@@ -12,6 +12,10 @@ body {
     background-color: #fff;
 }
 
+a {
+    text-decoration: none;
+}
+
 .title_bar {
     position: fixed;
     top: 0px;
@@ -183,19 +187,37 @@ body {
     border-bottom:1px solid #ccc;
     padding:10px 20px;
 }
+.current_topic_img{
+    float:left;
+    background-color: transparent;
+    border: 1px solid rgba(0,0,0,.1);
+    box-shadow: 0px 1px 0px rgba(255,255,255,0.1);
+    border-radius: 3px;
+}
 .current_topic_name{
+    position: relative;
+    top: 30px;
     color:#ffffff;
     font-size:20px;
     border:1px solid #daecf5;
-    border-radius:30px;
+    border-radius:3px;
     padding:3px 10px 3px 10px;
     background: #0767c8;
     background: -webkit-linear-gradient(top,#086ed5,#055db5);
     background: linear-gradient(to bottom,#086ed5,#055db5);
-    margin-left: -20px;
+    margin-left: 0px;
 }
 .sub_topic{
     line-height: 2.4; 
+    height: 100%;
+}
+.sub_topic li{
+    list-style: none;
+    float: left;
+}
+.current_topic_desc{
+    clear:left;
+
 }
 .spider_controller{
     background-color:#aaffaa;
@@ -205,29 +227,32 @@ body {
     width: 100%;
     background-color:#aaaaff;
 }
+  .clearfloat{
+      clear: left;
+  }
 
 
         </style>
-<script>
+        <script>
 if(typeof(EventSource)!=="undefined")
-  {
-  var source=new EventSource("/time/");
-  source.onmessage=function(event)
+{
+    var source=new EventSource("/time/");
+    source.onmessage=function(event)
     {
-    document.getElementById("monitoring_text").innerHTML+=event.data + "<br />";
+        document.getElementById("monitoring_text").innerHTML+=event.data + "<br />";
     };
-  }
+}
 else
-  {
-  document.getElementById("monitoring_text").innerHTML="抱歉，您的浏览器不支持 server-sent 事件 ...";
-  }
-</script>
- 
+{
+    document.getElementById("monitoring_text").innerHTML="抱歉，您的浏览器不支持 server-sent 事件 ...";
+}
+        </script>
+
     </head>
     <body>
         <div class="title_bar">
             <div class=center_bar>
-                <div class="title">知乎</div>
+                <a class="title" href="/home">知乎</a>
                 <div class="serch">
                     <form method="GET">
                         <input name="topic_name" class="input" placeholder="搜索你感兴趣的话题...">
@@ -249,7 +274,7 @@ else
                     <ol>
                         {% for topic in top100_topics %}
                         <li>
-                            <span class="topic_name"><strong>{{topic.name}}</strong></span>
+                            <a class="topic_name" href="/{{topic.topic_id}}"><strong>{{topic.name}}</strong></a>
                             <span class="topic_info">{{topic.follower_num}}人关注</span>
                         </li>
                         {% endfor %}
@@ -257,40 +282,45 @@ else
                 </div>
             </div>
             <div class="left_content">
-                <div class="spider_controller">
+                <!--
+                    <div class="spider_controller">
                     <div class="monitoring_text" id="monitoring_text">
                     </div>
                     <button>
-                        开始采集/停止
+                    开始采集/停止
                     </button>
-                </div>
+                    </div>
+                -->
                 {% for current_topic in current_topic_list %}
-                    <div class="current_topic_info">
-                        <span class="current_topic_name">
-                            {{current_topic.name}} 
-                        </span>
-                        <span class="topic_info">&nbsp{{current_topic.follower_num}}人关注&nbsp</span>
-                        <div class="sub_topic">
-                            <div><b>子话题</b></div>
-                            {% if current_topic.sub_topic.all %}
-                                {% for sub_topic in current_topic.sub_topic.all %}
-                                    <span class="sub_topic_name">{{sub_topic.name}}</span>&nbsp&nbsp
-                                {% endfor %}
+                <div class="current_topic_info">
+                    <a href="https://www.zhihu.com/topic/{{current_topic.topic_id}}/hot" target="_blank" >
+                    <img src="{% static "topic_img/" %}{{current_topic.topic_id}}.png" class="current_topic_img" style="width:60px; height:60px;">
+                    </a>
+                    <a class="current_topic_name" href="https://www.zhihu.com/topic/{{current_topic.topic_id}}/hot" target="_blank">
+                        {{current_topic.name}} 
+                    </a>
+                    <span class="topic_info">&nbsp;{{current_topic.follower_num}}人关注&nbsp;</span>
+                    <div class="current_topic_desc"><b>描述</b>
+                        <div>
+                            {% if current_topic.description %}
+                            <span class="current_topic_description"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{current_topic.description}} </span>
                             {% else %}
-                                    &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp暂无
+                            <span class="current_topic_description"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;暂无 </span>
                             {% endif %}
                         </div>
-                        <div><b>描述</b>
-                            <div>
-                                {% if current_topic_description %}
-                                    <span class="current_topic_description"> &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp{{current_topic.description}} </span>
-                                {% else %}
-                                    <span class="current_topic_description"> &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp暂无 </span>
-                                {% endif %}
-                            </div>
-                        </div>
-
                     </div>
+                    <div class="sub_topic">
+                        <div><b>子话题</b></div>
+                        {% if current_topic.sub_topic.all %}
+                        {% for sub_topic in current_topic.sub_topic.all %}
+                        <li><a class="sub_topic_name" href="/{{sub_topic.topic_id}}">{{sub_topic.name}}({{sub_topic.follower_num}})</a>&nbsp;&nbsp;</li>
+                        {% endfor %}
+                        {% else %}
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;暂无
+                        {% endif %}
+                        <div class="clearfloat"></div>
+                    </div>
+                </div>
                 {% endfor %}
             </div>
         </div>

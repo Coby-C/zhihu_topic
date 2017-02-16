@@ -21,5 +21,5 @@ urlpatterns = [
     url(r'^$',return_home_page),
     url(r'^admin/$', admin.site.urls),
     url(r'^home/$',return_home_page),
-    url(r'^time/$',time),
+    url(r'^(?P<topic_id>\d+)/$',return_home_page),
 ]
